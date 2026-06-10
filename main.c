@@ -9,6 +9,9 @@
 #define WAVE_SPEED 100
 #define WAVE_FREQ 0.1f
 
+Color objectColor = (Color){0, 0, 0, 255};
+Color waveColor = (Color){255, 255, 255, 255};
+
 struct Object{
 	float x, y;
 };
@@ -24,13 +27,13 @@ float time_last_wave = 0.0f;
 
 
 void draw_object(){
-	DrawCircle(object.x, object.y, 20, WHITE);
+	DrawCircle(object.x, object.y, 20, objectColor);
 }
 
 void draw_waves(){
 	for(int i=0; i<MAX_WAVES; i++){
 		if(waves[i].x != 0 && waves[i].y != 0 && waves[i].r != 0)
-			DrawCircleLines(waves[i].x, waves[i].y, waves[i].r, WHITE);
+			DrawCircleLines(waves[i].x, waves[i].y, waves[i].r, waveColor);
 	}
 }
 
