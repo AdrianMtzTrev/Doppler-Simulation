@@ -5,11 +5,11 @@
 #define WIDTH 800
 #define HEIGHT 450
 #define MAX_WAVES 60
-#define OBJECT_SPEED 1.0f
+#define OBJECT_SPEED 50.0f
 #define WAVE_SPEED 100
 #define WAVE_FREQ 0.3f
 
-Color objectColor = (Color){0, 0, 0, 255};
+Color objectColor = (Color){255, 255, 255, 255};
 Color waveColor = (Color){255, 255, 255, 255};
 
 struct Object{
@@ -47,7 +47,6 @@ void emit_wave(float delta){
 	}else{
 		time_last_wave += delta;
 	}
-	//printf("Current waves: %d\n", current_waves);
 }
 
 void draw(){
@@ -55,11 +54,11 @@ void draw(){
 	draw_waves();
 }
 
-void move_object(){
-	if(IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) object.x += OBJECT_SPEED;
-	if(IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) object.x -= OBJECT_SPEED;
-	if(IsKeyDown(KEY_UP) || IsKeyDown(KEY_W)) object.y -= OBJECT_SPEED;
-	if(IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S)) object.y += OBJECT_SPEED;
+void move_object(float delta){
+	if(IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) object.x += (OBJECT_SPEED * delta);
+	if(IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) object.x -= (OBJECT_SPEED * delta);
+	if(IsKeyDown(KEY_UP) || IsKeyDown(KEY_W)) object.y -= (OBJECT_SPEED * delta);
+	if(IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S)) object.y += (OBJECT_SPEED * delta);
 }
 
 void move_waves(float delta){
@@ -71,7 +70,7 @@ void move_waves(float delta){
 void update(){
 	float delta_time = GetFrameTime();
 	emit_wave(delta_time);
-	move_object();
+	move_object(delta_time);
 	move_waves(delta_time);
 }
 
