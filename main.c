@@ -75,7 +75,7 @@ void update(){
 }
 
 
-int main(int argc, const char *agrv[])
+int main(int argc, const char *argv[])
 {
 	InitWindow(WIDTH, HEIGHT, "Raylib - Doppler Effect");
 	SetTargetFPS(60);
