@@ -4,10 +4,10 @@
 
 #define WIDTH 800
 #define HEIGHT 450
-#define MAX_WAVES 600
+#define MAX_WAVES 60
 #define OBJECT_SPEED 1.0f
 #define WAVE_SPEED 100
-#define WAVE_FREQ 0.1f
+#define WAVE_FREQ 0.3f
 
 Color objectColor = (Color){0, 0, 0, 255};
 Color waveColor = (Color){255, 255, 255, 255};
@@ -42,11 +42,11 @@ void emit_wave(float delta){
 		current_waves = 0;
 	if (time_last_wave > WAVE_FREQ){
 		waves[current_waves] =  (struct DopplerWave){object.x, object.y, 1};
+		current_waves++;
 		time_last_wave = 0;
 	}else{
 		time_last_wave += delta;
 	}
-	current_waves++;
 	//printf("Current waves: %d\n", current_waves);
 }
 
@@ -83,8 +83,8 @@ int main(int argc, const char *agrv[])
 	while(!WindowShouldClose()){
 		BeginDrawing();
 		ClearBackground(BLACK);
-		draw();
 		update();
+		draw();
 		EndDrawing();
 	}
 
