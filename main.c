@@ -2,11 +2,11 @@
 #include<stdlib.h>
 #include<raylib.h>
 
-#define WIDTH 800
-#define HEIGHT 450
+#define WIDTH 1920
+#define HEIGHT 1080
 #define MAX_WAVES 60
 #define OBJECT_SPEED 50.0f
-#define WAVE_SPEED 100
+#define WAVE_SPEED 60
 #define WAVE_FREQ 0.3f
 
 Color objectColor = (Color){255, 255, 255, 255};
@@ -38,7 +38,7 @@ void draw_waves(){
 }
 
 void emit_wave(float delta){
-	if (current_waves > MAX_WAVES)
+	if (current_waves >= MAX_WAVES)
 		current_waves = 0;
 	if (time_last_wave > WAVE_FREQ){
 		waves[current_waves] =  (struct DopplerWave){object.x, object.y, 1};
@@ -78,12 +78,13 @@ void update(){
 int main(int argc, const char *argv[])
 {
 	InitWindow(WIDTH, HEIGHT, "Raylib - Doppler Effect");
-	SetTargetFPS(60);
+	SetTargetFPS(30);
 	while(!WindowShouldClose()){
 		BeginDrawing();
 		ClearBackground(BLACK);
 		update();
 		draw();
+		DrawFPS(10,10);
 		EndDrawing();
 	}
 
