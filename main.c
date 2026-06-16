@@ -18,6 +18,7 @@ struct Object{
 
 struct DopplerWave{
 	float x,y,r;
+	bool active;
 };
 
 struct Object object = (struct Object){WIDTH/2, HEIGHT/2};
@@ -32,7 +33,7 @@ void draw_object(){
 
 void draw_waves(){
 	for(int i=0; i<MAX_WAVES; i++){
-		if(waves[i].x != 0 && waves[i].y != 0 && waves[i].r != 0)
+		if(waves[i].active)
 			DrawCircleLines(waves[i].x, waves[i].y, waves[i].r, waveColor);
 	}
 }
@@ -41,7 +42,7 @@ void emit_wave(float delta){
 	if (current_waves >= MAX_WAVES)
 		current_waves = 0;
 	if (time_last_wave > WAVE_FREQ){
-		waves[current_waves] =  (struct DopplerWave){object.x, object.y, 1};
+		waves[current_waves] =  (struct DopplerWave){object.x, object.y, 1, true};
 		current_waves++;
 		time_last_wave = 0;
 	}else{
@@ -63,7 +64,8 @@ void move_object(float delta){
 
 void move_waves(float delta){
 	for(int i = 0; i < MAX_WAVES; i++){
-		waves[i].r += (WAVE_SPEED * delta);
+		if(waves[i].active)
+			waves[i].r += (WAVE_SPEED * delta);
 	}
 }
 
