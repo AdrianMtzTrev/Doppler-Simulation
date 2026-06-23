@@ -4,12 +4,12 @@
 
 #define WIDTH 1920
 #define HEIGHT 1080
-#define MAX_WAVES 60
+#define MAX_WAVES 100
 #define OBJECT_SPEED 50.0f
-#define WAVE_SPEED 60
+#define WAVE_SPEED 100
 #define WAVE_FREQ 0.3f
 
-Color objectColor = (Color){255, 255, 255, 255};
+Color objectColor = (Color){255, 255, 255, 0};
 Color waveColor = (Color){255, 255, 255, 255};
 
 struct Object{
@@ -80,7 +80,7 @@ void update(){
 int main(void)
 {
 	InitWindow(WIDTH, HEIGHT, "Raylib - Doppler Effect");
-	SetTargetFPS(30);
+	SetTargetFPS(60);
 	while(!WindowShouldClose()){
 		BeginDrawing();
 		ClearBackground(BLACK);
